@@ -7,15 +7,23 @@ using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
 
 namespace Pizza_Mama.Pages.Admin
 {
     public class IndexModel : PageModel
     {
         public bool pasConnecte = false;
+        public bool IsDevelopmentMode = false;
         IConfiguration configuration;
-        public IndexModel(IConfiguration configuration) { 
+        public IndexModel(IConfiguration configuration, IWebHostEnvironment env) { 
             this.configuration = configuration;
+
+            if (env.IsDevelopment())
+            {
+                IsDevelopmentMode = true;
+            }
         }
         public IActionResult OnGet()
         {
